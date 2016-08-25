@@ -1,5 +1,4 @@
 import numpy as np
-import math
 import matplotlib.pyplot as plt
 import pylab as pl
 
@@ -27,18 +26,35 @@ def costFunctionJ(X,y,theta): #线性回归，损失函数
         summary = summary + sumOfSquares_Htheta_y(h_theta[i,0],y[i, 0])
         #print("y=", y[i, 0], ",htheta=", h_theta,",summary=",summary)
     J=1/(2*m)*summary
-    print("j=",J)
+    #print("j=",J)
     return J
 
 def testCostFunctionJ(_theta):
     # 构造参数为[1 x]的矩阵,定义theta0为1,根据Htheta的计算公式 Htheta=theta0+theta1*X1++theta1*X2+。。。+thetaN*XN
-    X = np.matrix('1 1; 1 2; 1 3')
+    X = np.matrix('1 1; 1 2; 1 3;1 4;1 5')  #特征参数
     theta = np.matrix(_theta)
-    y = np.matrix('1;2;3')
+    y = np.matrix('1;2;3;4;5')   #预测值
     # print(X[:,1].size)
     J = costFunctionJ(X, y, theta)
-    print(J)
+    #print(J)
     return J
+
+def drawCostFunctionJ():
+    i = -3
+    x = []
+    y = []
+    while (i <= 3):
+        tmp = '0;' + str(i)
+        htheta = testCostFunctionJ(tmp)
+        x.append(i)
+        y.append(htheta)
+        pl.plot(i, htheta, 'b*')
+        i = i + 0.1
+        # print("i=", i, htheta)
+    pl.plot(x, y, 'r-')
+    pl.xlim(-7.0, 7.0)  # set axis limits
+    pl.ylim(0.0, 7.0)  # set axis limits
+    pl.show()
 
 #Q(j):=Q(j)-a*[d/(d*Q(j))*J(Q(0),Q(1))] (for j=0 and j=1
 def bathGradientDescentAlgorithm():
@@ -56,24 +72,5 @@ def bathGradientDescentAlgorithm():
 X = np.matrix('1 1; 1 2; 1 3')
 theta = np.matrix('0;0.5')
 y = np.matrix('1;2;3')
-print(theta.T)
-print(X.T)
-htheta=X*theta
-print("y=",X*theta)
-pl.figure(1,figsize=(8,8)) # 创建图表1
-ax1 = plt.subplot(211) # 在图表2中创建子图1
-# pl.plot(-10,-10)
-# pl.plot(10,10)
-# pl.plot(X[:,1], y,'b*')#,label=$cos(x^2)$)
-# pl.plot(X[:,1], y,'r')
-# pl.show()
-#
-i=-100
-for i in range(100):
-    tmp='0;'+str(i)
-    #print("tmp=",tmp)
-    htheta=testCostFunctionJ(tmp)
-    print("i=",i,htheta)
-    pl.plot(i,htheta,'b*')
+drawCostFunctionJ()
 
-pl.show()
