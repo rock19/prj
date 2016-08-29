@@ -68,7 +68,7 @@ def bathGradientDescentAlgorithm(X,y):
     # a为学习曲率, learning rate
     # theta0 j=0 :  1/m (i=1 to m 求和)(htheta(x[i])-y[i])
     # theta1 j=1 :  1/m (i=1 to m 求和)(htheta(x[i])-y[i])*x[i]
-    altha=0.001  #学习曲率
+    altha=0.01  #学习曲率
     m=len(X)
     htheta=0
     # 迭代阀值，当两次迭代损失函数之差小于该阀值时停止迭代
@@ -93,8 +93,6 @@ def bathGradientDescentAlgorithm(X,y):
         error1=costFunctionJ(X,y,theta)
 
 
-        # for i in range(m):
-        #     error1 += (y[i,0] - (theta0 + theta1 * X[i][1])) ** 2 / 2
         if abs(error1-error0)<epsilon:
             break
         else:
@@ -105,9 +103,9 @@ def bathGradientDescentAlgorithm(X,y):
 
 #testCostFunctionJ()
 #X = np.matrix([[1, 1], [1, 2], [1, 3]])
-X = np.matrix('1 2; 1 4; 1 5;1 7;1 9;1 11;1 13;1 15;1 20')
+X = np.matrix('1 2; 1 7; 1 8;1 9;1 13;1 14;1 15;1 13;1 12')
 theta = np.matrix('0;0.5')
-y = np.matrix('1;1.3;1.5;1.7;1.9;2;2.1;2.5;3')
+y = np.matrix('1;3;4;3;5;4;6;7;5')
 #drawCostFunctionJ()
 
 print("X len =",len(X))
